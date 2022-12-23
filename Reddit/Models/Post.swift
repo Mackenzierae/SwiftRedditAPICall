@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct TopLevelObject {
+struct TopLevelObject: Codable {
     let data: SecondLevelObject
 }
 
-struct SecondLevelObject {
+struct SecondLevelObject: Codable {
     let children: [ThirdLevelObject]
 }
 
-struct ThirdLevelObject {
+struct ThirdLevelObject: Codable {
     let data: Post
 }
 
-struct Post {
+struct Post: Codable {
     let title: String
     let ups: Int
     let thumbnail: String //
