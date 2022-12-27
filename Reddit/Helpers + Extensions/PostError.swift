@@ -10,13 +10,11 @@ import Foundation
 
 enum PostError: LocalizedError {
     case invalidURL
-    case thrownError(Error) // taking in Type error aka E not e
+    case thrownError(Error)
     case noData
     case unableToDecode
     
     var errorDescription: String? {
-//        for me or user
-        // self is posterror - gotta account for all cases.
         switch self {
         case .invalidURL:
             return "The server failed to reach the necessary URL."
@@ -27,7 +25,6 @@ enum PostError: LocalizedError {
         case .unableToDecode:
             return "Unable to decode the data."
         }
-    
     }
     
     

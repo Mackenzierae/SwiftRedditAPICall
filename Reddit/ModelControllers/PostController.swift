@@ -5,10 +5,8 @@
 //  Created by Mackenzie Wacker on 12/23/22.
 //
 
-import Foundation
 import UIKit
 
-//don't have a shared instance so making everything static'
 class PostController {
     
     // MARK: - String Constants
@@ -16,32 +14,29 @@ class PostController {
     static let rComponent = "r"
     static let jsonExtension = "json"
     
-    
-    
-    //https://www.reddit.com/r/funny.json
+
     // MARK: - Fetch
     static func fetchPostsWith(searchTerm: String, completion: @escaping (Result<[Post], PostError>) -> Void) {
-        // 1) URL
+        //URL
         guard let baseURL = baseURL else { return completion(.failure(.invalidURL))}
         let rURL = baseURL.appendingPathComponent(rComponent)
         let searchURL = rURL.appendingPathComponent(searchTerm)
         let finalURL = searchURL.appendingPathExtension(jsonExtension)
         print(finalURL)
-        // 2) Data Tasks
+        //Data Tasks
         URLSession.shared.dataTask(with: finalURL) { data, response, error in
-            
-            //handle error
+            //Handle error
             if let unwrappedError = error {
                 return completion(.failure(.thrownError(unwrappedError)))
             }
-            //handle response
+            //Handle response
             if let unwrappedResponse = response as? HTTPURLResponse {
                 if unwrappedResponse.statusCode != 200 {
                     print("POST STATUS CODE: \(unwrappedResponse.statusCode)")
                 }
             }
-            //handle data
-            guard let unwrappedData = data else { return completion(.failure(.noData)) } // if i can't unwrap I'll have .noData
+            //Handle data
+            guard let unwrappedData = data else { return completion(.failure(.noData)) }
             
             do {
                 let topLevelObject = try JSONDecoder().decode(TopLevelObject.self, from: unwrappedData)
@@ -70,11 +65,10 @@ class PostController {
         
         URLSession.shared.dataTask(with: thumbnailURL) { data, response, error in
             
-            //handle error
             if let unwrappedError = error {
                 return completion(.failure(.thrownError(unwrappedError)))
             }
-            //handle response
+
             if let unwrappedResponse = response as? HTTPURLResponse {
                 if unwrappedResponse.statusCode != 200 {
                     print("THUMBNAIL STATUS CODE: \(unwrappedResponse.statusCode)")
@@ -82,10 +76,9 @@ class PostController {
             }
 
             guard let unwrappedData = data else { return completion(.failure(.noData)) } // don't need a try catch cause we would already have data
-            //pass that data into UIImage and complete otherwilse will send unableToDecode
             guard let thumbnail = UIImage(data: unwrappedData) else {return completion(.failure(.unableToDecode)) }
             
-            return completion(.success(thumbnail)) //option click it's a UIImage wohoooooo
+            return completion(.success(thumbnail))
             
         }.resume()
         

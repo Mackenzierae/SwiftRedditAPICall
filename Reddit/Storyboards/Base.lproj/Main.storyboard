@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zuB-o7-Fbe">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21507"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="481" id="wcj-xx-meq">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" rowHeight="481" id="wcj-xx-meq" customClass="PostTableViewCell" customModule="Reddit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="94" width="393" height="481"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wcj-xx-meq" id="L8H-YE-3El">
@@ -71,6 +71,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.80779344409999998" green="1" blue="0.99495263079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="postImageView" destination="t25-hw-O8f" id="12h-Gk-xQj"/>
+                                    <outlet property="postTitleLabel" destination="F9H-p6-mhX" id="2FY-gc-06n"/>
+                                    <outlet property="postUpsLabel" destination="Yox-xN-x5b" id="9nC-S7-9Vb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -79,19 +84,10 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="searchDisplayController" destination="5IM-Bz-yKd" id="4FU-Hl-Dur"/>
+                        <outlet property="searchBar" destination="GcI-Vb-UUp" id="cyA-PD-J5s"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4p4-Se-7pw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="5IM-Bz-yKd">
-                    <connections>
-                        <outlet property="delegate" destination="zuB-o7-Fbe" id="g57-cy-dBr"/>
-                        <outlet property="searchBar" destination="GcI-Vb-UUp" id="6na-PQ-DvQ"/>
-                        <outlet property="searchContentsController" destination="zuB-o7-Fbe" id="hqN-iG-iqt"/>
-                        <outlet property="searchResultsDataSource" destination="zuB-o7-Fbe" id="vRS-z7-Zu0"/>
-                        <outlet property="searchResultsDelegate" destination="zuB-o7-Fbe" id="D8k-BA-7Gu"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="-312.21374045801525" y="41.549295774647888"/>
         </scene>
